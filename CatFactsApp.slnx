@@ -1,2 +1,5 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/CatFactsApp.Tests/CatFactsApp.Tests.csproj" />
+  </Folder>
 </Solution>
