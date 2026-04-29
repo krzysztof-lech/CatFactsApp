@@ -49,7 +49,7 @@ public class CatFactServiceTests
         Assert.NotNull(result);
         Assert.Equal("Cats are liquid.", result.Fact);
 
-
+        if (File.Exists("test_facts.txt")) File.Delete("test_facts.txt");
     }
 
     [Fact]
