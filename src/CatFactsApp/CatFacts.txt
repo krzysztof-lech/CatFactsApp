@@ -1,0 +1,4 @@
+Fact: British cat owners spend roughly 550 million pounds yearly on cat food.
+Length: 71
+Fact: Cats have been domesticated for half as long as dogs have been.
+Length: 63
