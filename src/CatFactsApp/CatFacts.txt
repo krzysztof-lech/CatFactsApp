@@ -6,3 +6,7 @@ Fact: A female cat will be pregnant for approximately 9 weeks or between 62 and 
 Length: 110
 Fact: Tylenol and chocolate are both poisionous to cats.
 Length: 50
+Fact: In 1987, cats overtook dogs as the number one pet in America (about 50 million cats resided in 24 million homes in 1986). About 37% of American homes today have at least one cat.
+Length: 178
+Fact: At 4 weeks, it is important to play with kittens so that they do not develope a fear of people.
+Length: 95

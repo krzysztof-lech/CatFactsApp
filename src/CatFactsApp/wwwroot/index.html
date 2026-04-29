@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>CatFactApp</title>
+    </head>
+    <body>
+        <h1>Cat Facts</h1>
+        <button onclick="fetchFact()">Get cat fact.</button>
+        
+        <p id="fact"></p>
+        <p id="length"></p>
+        <p id="status"></p>
+        
+        <script>
+
+            async function fetchFact()
+            {
+                const response = await fetch('/api/CatFact/fetch');
+
+                if(!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+
+                document.getElementById('fact').textContent = 'Fact: ' + data.data.fact;
+                document.getElementById('length').textContent = 'Length: ' + data.data.length;
+                document.getElementById('status').textContent = 'Saved to file.';
+            }
+        </script>
+    </body>
+</html>

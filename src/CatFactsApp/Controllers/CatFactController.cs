@@ -25,11 +25,11 @@ public class CatFactController : ControllerBase
             var fact = await _catFactService.FetchAndSaveFactAsync();
             return Ok(new {Message = "Fact fetched and saved successfully", Data = fact});
         }
-        catch (HttpRequestException ex)
+        catch (HttpRequestException)
         {
             return StatusCode(503, "External API is temporarily unavailable.");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return StatusCode(500, "An internal server error occurred. Please try again later.");
         }
