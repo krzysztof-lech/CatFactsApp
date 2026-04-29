@@ -1,3 +1,5 @@
+using CatFactsApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 

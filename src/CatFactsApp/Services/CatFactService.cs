@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using CatFactsApp.Models;
 
 namespace CatFactsApp.Services;
 
@@ -23,7 +24,7 @@ public class CatFactService : ICatFactService
             {
                 throw new Exception("API did not return any data.");
             }
-            
+
             await File.AppendAllTextAsync("CatFacts.txt", $"Fact: {result.Fact}{Environment.NewLine}Length: {result.Length}{Environment.NewLine}");
 
             return result;
