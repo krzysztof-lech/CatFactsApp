@@ -4,6 +4,7 @@ using System.Net;
 using Moq;
 using Moq.Protected;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace CatFactsApp.Tests;
@@ -37,10 +38,11 @@ public class CatFactServiceTests
         httpClient.BaseAddress = new Uri("https://api.test/"); 
 
         var configMock = new Mock<IConfiguration>();
-
         configMock.Setup(c => c["FileSettings:Path"]).Returns("test_facts.txt");
 
-        var service = new CatFactService(httpClient, configMock.Object);
+        var loggerMock = new Mock<ILogger<CatFactService>>();
+
+        var service = new CatFactService(httpClient, configMock.Object, loggerMock.Object);
 
         // --- ACT ---
         var result = await service.FetchAndSaveFactAsync();
@@ -68,7 +70,13 @@ public class CatFactServiceTests
         .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
         .ReturnsAsync(response);
 
-        var service = new CatFactService(new HttpClient(handlerMock.Object) { BaseAddress = new Uri("https://api.test/") }, new Mock<IConfiguration>().Object);
+        var loggerMock = new Mock<ILogger<CatFactService>>();
+        var configMock = new Mock<IConfiguration>();
+
+        var service = new CatFactService(
+            new HttpClient(handlerMock.Object) { BaseAddress = new Uri("https://api.test/") }, 
+            configMock.Object, 
+            loggerMock.Object);
 
         // --- ACT & ASSERT ---
         var exception = await Assert.ThrowsAsync<Exception>(() => service.FetchAndSaveFactAsync());

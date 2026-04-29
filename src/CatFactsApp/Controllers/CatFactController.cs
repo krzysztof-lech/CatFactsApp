@@ -8,10 +8,12 @@ namespace CatFactsApp.Controllers;
 public class CatFactController : ControllerBase
 {
     private readonly ICatFactService _catFactService;
+    private readonly ILogger<CatFactController> _logger;
 
-    public CatFactController(ICatFactService catFactService)
+    public CatFactController(ICatFactService catFactService, ILogger<CatFactController> logger)
     {
         _catFactService = catFactService;
+        _logger = logger;
     }
 
     [HttpGet("fetch")]
@@ -22,15 +24,18 @@ public class CatFactController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Attempting to fetch a cat fact.");
             var fact = await _catFactService.FetchAndSaveFactAsync();
             return Ok(new {Message = "Fact fetched and saved successfully", Data = fact});
         }
-        catch (HttpRequestException)
+        catch (HttpRequestException ex)
         {
+            _logger.LogError(ex, "Network error occurred.");
             return StatusCode(503, "External API is temporarily unavailable.");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "An unexpected error occurred.");
             return StatusCode(500, "An internal server error occurred. Please try again later.");
         }
     }
