@@ -15,6 +15,9 @@ public class CatFactController : ControllerBase
     }
 
     [HttpGet("fetch")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAndSaveFact()
     {
         try
@@ -22,9 +25,13 @@ public class CatFactController : ControllerBase
             var fact = await _catFactService.FetchAndSaveFactAsync();
             return Ok(new {Message = "Fact fetched and saved successfully", Data = fact});
         }
-        catch(Exception e)
+        catch (HttpRequestException ex)
         {
-            return BadRequest(new { Error = e.Message});
+            return StatusCode(503, "External API is temporarily unavailable.");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An internal server error occurred. Please try again later.");
         }
     }
 }
