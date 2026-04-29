@@ -20,12 +20,12 @@ public class CatFactController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetAndSaveFact()
+    public async Task<IActionResult> GetAndSaveFact(CancellationToken ct)
     {
         try
         {
             _logger.LogInformation("Attempting to fetch a cat fact.");
-            var fact = await _catFactService.FetchAndSaveFactAsync();
+            var fact = await _catFactService.FetchAndSaveFactAsync(ct);
             return Ok(new {Message = "Fact fetched and saved successfully", Data = fact});
         }
         catch (HttpRequestException ex)

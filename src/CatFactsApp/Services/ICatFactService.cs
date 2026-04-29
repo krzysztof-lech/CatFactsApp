@@ -4,5 +4,5 @@ namespace CatFactsApp.Services;
 
 public interface ICatFactService
 {
-    Task<CatFactDto> FetchAndSaveFactAsync();
+    Task<CatFactDto> FetchAndSaveFactAsync(CancellationToken ct = default);
 }

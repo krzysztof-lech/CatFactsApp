@@ -19,12 +19,12 @@ public class CatFactService : ICatFactService
     }
 
 
-    public async Task<CatFactDto> FetchAndSaveFactAsync()
+    public async Task<CatFactDto> FetchAndSaveFactAsync(CancellationToken ct = default)
     {
         try
         {
              _logger.LogInformation("Starting to fetch a fact from the API.");
-            var result = await _httpClient.GetFromJsonAsync<CatFactDto>("fact");
+            var result = await _httpClient.GetFromJsonAsync<CatFactDto>("fact", ct);
             
             if (result == null || string.IsNullOrWhiteSpace(result.Fact))
             {
