@@ -62,3 +62,11 @@ Fact: Unlike other cats, lions have a tuft of hair at the end of their tails.
 Length: 71
 Fact: A female cat is called a queen or a molly.
 Length: 42
+Fact: Cats' hearing stops at 65 khz (kilohertz); humans' hearing stops at 20 khz.
+Length: 75
+Fact: Tests done by the Behavioral Department of the Musuem of Natural History conclude that while a dog's memory lasts about 5 minutes, a cat's recall can last as long as 16 hours.
+Length: 175
+Fact: The cat's footpads absorb the shocks of the landing when the cat jumps.
+Length: 71
+Fact: In 1987 cats overtook dogs as the number one pet in America.
+Length: 60

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>CatFactApp</title>
@@ -8,18 +8,21 @@
         <h1>🐱 Cat Facts</h1>
         <button onclick="fetchFact()">Get cat fact.</button>
         
+        <button id="speakBtn" onclick="speakFact()" disabled>🔊 Speak</button>
         <p id="fact"></p>
         <p id="length"></p>
         <p id="status"></p>
         
         <script>
             let loadingTimer;
+
             async function fetchFact()
             {
                 const btn = document.querySelector('button[onclick="fetchFact()"]');
-                
+                const speakBtn = document.getElementById('speakBtn');
 
                 btn.disabled = true;
+                speakBtn.disabled = true;
 
                 loadingTimer = setTimeout(() => {
                     btn.textContent = 'Loading...';
@@ -37,7 +40,10 @@
                     document.getElementById('fact').textContent = 'Fact: ' + data.data.fact;
                     document.getElementById('length').textContent = 'Length: ' + data.data.length;
                     document.getElementById('status').textContent = 'Saved to file.';
-                }catch(error)
+                    
+                    speakBtn.disabled = false;
+                }
+                catch(error)
                 {
                     document.getElementById('status').textContent = 'Error fetching fact.';
                     console.error(error);
@@ -46,8 +52,26 @@
                     clearTimeout(loadingTimer);
                     btn.disabled = false;
                     btn.textContent = 'Get cat fact.';
+                }                      
+            }
+
+            function speakFact() {
+                try{
+                    const factText = document.getElementById('fact').textContent;
+                    if (!factText) return;
+
+                    const utterance = new SpeechSynthesisUtterance(factText);
+                    utterance.lang = 'en-US';
+
+                    utterance.onerror = (event) => {
+                        console.error("Speech synthesis failed:", event.error);
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+
+                }catch(err){
+                    console.error("Critical error in speakFact: ", err);
                 }
-                
             }
         </script>
     </body>
