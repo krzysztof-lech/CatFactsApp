@@ -79,7 +79,7 @@ public class CatFactServiceTests
             loggerMock.Object);
 
         // --- ACT & ASSERT ---
-        var exception = await Assert.ThrowsAsync<Exception>(() => service.FetchAndSaveFactAsync());
-        Assert.Equal("API did not return any data.", exception.Message);
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => service.FetchAndSaveFactAsync());
+        Assert.Equal("API returned an invalid or empty fact format.", exception.Message);
     }
 }

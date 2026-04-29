@@ -26,10 +26,10 @@ public class CatFactService : ICatFactService
              _logger.LogInformation("Starting to fetch a fact from the API.");
             var result = await _httpClient.GetFromJsonAsync<CatFactDto>("fact");
             
-            if (result == null) 
+            if (result == null || string.IsNullOrWhiteSpace(result.Fact))
             {
-                _logger.LogWarning("API returned null data.");
-                throw new Exception("API did not return any data.");
+                _logger.LogWarning("The API returned an invalid or empty fact.");
+                throw new InvalidOperationException("API returned an invalid or empty fact format.");
             }
 
             await File.AppendAllTextAsync(_filePath, $"Fact: {result.Fact}{Environment.NewLine}Length: {result.Length}{Environment.NewLine}");
