@@ -4,5 +4,5 @@ namespace CatFactsApp.Services;
 
 public interface ICatFactService
 {
-    Task<CatFactDto> FetchAndSaveAsync();
+    Task<CatFactDto> FetchAndSaveFactAsync();
 }
