@@ -2,3 +2,7 @@ Fact: British cat owners spend roughly 550 million pounds yearly on cat food.
 Length: 71
 Fact: Cats have been domesticated for half as long as dogs have been.
 Length: 63
+Fact: A female cat will be pregnant for approximately 9 weeks or between 62 and 65 days from conception to delivery.
+Length: 110
+Fact: Tylenol and chocolate are both poisionous to cats.
+Length: 50

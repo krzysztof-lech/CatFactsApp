@@ -20,7 +20,7 @@ public class CatFactService : ICatFactService
     public async Task<CatFactDto> FetchAndSaveFactAsync()
     {
 
-            var result = await _httpClient.GetFromJsonAsync<CatFactDto>("https://catfact.ninja/fact");
+            var result = await _httpClient.GetFromJsonAsync<CatFactDto>("fact");
             
             if (result == null) 
             {
