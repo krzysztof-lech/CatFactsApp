@@ -5,7 +5,7 @@
         <title>CatFactApp</title>
     </head>
     <body>
-        <h1>Cat Facts</h1>
+        <h1>🐱 Cat Facts</h1>
         <button onclick="fetchFact()">Get cat fact.</button>
         
         <p id="fact"></p>
@@ -13,18 +13,41 @@
         <p id="status"></p>
         
         <script>
-
+            let loadingTimer;
             async function fetchFact()
             {
-                const response = await fetch('/api/CatFact/fetch');
+                const btn = document.querySelector('button[onclick="fetchFact()"]');
+                
 
-                if(!response.ok) throw new Error('Network response was not ok');
+                btn.disabled = true;
 
-                const data = await response.json();
+                loadingTimer = setTimeout(() => {
+                    btn.textContent = 'Loading...';
+                    document.getElementById('status').textContent = 'Fetching...';
+                }, 300);
+                
+                try
+                {
+                    const response = await fetch('/api/CatFact/fetch');
 
-                document.getElementById('fact').textContent = 'Fact: ' + data.data.fact;
-                document.getElementById('length').textContent = 'Length: ' + data.data.length;
-                document.getElementById('status').textContent = 'Saved to file.';
+                    if(!response.ok) throw new Error('Network response was not ok');
+
+                    const data = await response.json();
+
+                    document.getElementById('fact').textContent = 'Fact: ' + data.data.fact;
+                    document.getElementById('length').textContent = 'Length: ' + data.data.length;
+                    document.getElementById('status').textContent = 'Saved to file.';
+                }catch(error)
+                {
+                    document.getElementById('status').textContent = 'Error fetching fact.';
+                    console.error(error);
+                }
+                finally {
+                    clearTimeout(loadingTimer);
+                    btn.disabled = false;
+                    btn.textContent = 'Get cat fact.';
+                }
+                
             }
         </script>
     </body>
