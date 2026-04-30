@@ -9,6 +9,8 @@ It includes a minimal frontend UI, Swagger documentation, and unit tests coverin
 - Minimal frontend UI with a Text-to-Speech option
 - Swagger UI for easy API testing
 - Configurable via `appsettings.json`
+- Dependency Injection
+- Logging via built-in ASP.NET Core ILogger
 
 ## Tech Stack
 - **Backend**: ASP.NET Core Web API (.NET 8)
