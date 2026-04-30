@@ -427,3 +427,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Temporary or project-specific files
+src/CatFactsApp/CatFacts.txt
